@@ -10,126 +10,126 @@ describe("RegistrationForm Tests", () => {
     });
 
     test("Set valid email", () => {
-        registrationForm.setEmail(DataVariables.variableMail);
-        expect(registrationForm.Email).toEqual(DataVariables.variableMail);
+        registrationForm.setEmail(DataVariables.alexEmail);
+        expect(registrationForm.Email).toEqual(DataVariables.alexEmail);
     });
 
     test("Invalid email format", () => {
         expect(() => {
-            registrationForm.setEmail(DataVariables.variableMail2);
-        }).toThrow(DataErrorMessage.errorText1); 
+            registrationForm.setEmail(" ");
+        }).toThrow(DataErrorMessage.invalidEmailError); 
     });
 
     test("Invalid email format with dot", () => {
         expect(() => {
-            registrationForm.setEmail(DataVariables.variableMail3);
-        }).toThrow(DataErrorMessage.errorText1); 
+            registrationForm.setEmail(". ");
+        }).toThrow(DataErrorMessage.invalidEmailError); 
     });
     
     test("Set valid password", () => {
-        registrationForm.setPassword(DataVariables.variablePassword);
-        expect(registrationForm.Password).toEqual(DataVariables.variablePassword);
+        registrationForm.setPassword(DataVariables.validPassword);
+        expect(registrationForm.Password).toEqual(DataVariables.validPassword);
     });
     
     test("Invalid password with only letters", () => {
         expect(() => {
-            registrationForm.setPassword(DataVariables.variablePassword6);
-        }).toThrow(DataErrorMessage.errorText2);  
+            registrationForm.setPassword("qasdefdw");
+        }).toThrow(DataErrorMessage.invalidPasswordError);  
     });
 
     test("Invalid password with only symbols", () => {
         expect(() => {
-            registrationForm.setPassword(DataVariables.variablePassword5);
-        }).toThrow(DataErrorMessage.errorText2);  
+            registrationForm.setPassword("%%%%%%%%");
+        }).toThrow(DataErrorMessage.invalidPasswordError);  
     });
 
     test("Set valid password with only numbers", () => {
-        registrationForm.setPassword(DataVariables.variablePassword4);
-        expect(registrationForm.Password).toEqual(DataVariables.variablePassword4);
+        registrationForm.setPassword("12345678");
+        expect(registrationForm.Password).toEqual("12345678");
     });
 
     test("Invalid password length with only letters", () => {
         expect(() => {
-            registrationForm.setPassword(DataVariables.variablePassword3);
-        }).toThrow(DataErrorMessage.errorText2);  
+            registrationForm.setPassword("qasdefd");
+        }).toThrow(DataErrorMessage.invalidPasswordError);  
     });
 
     test("Invalid password length with only numbers", () => {
         expect(() => {
-            registrationForm.setPassword(DataVariables.variablePassword2);
-        }).toThrow(DataErrorMessage.errorText2); 
+            registrationForm.setPassword("1234567");
+        }).toThrow(DataErrorMessage.invalidPasswordError); 
     });
 
     test("Set valid username", () => {
-        registrationForm.setUsername(DataVariables.variableUserName);
-        expect(registrationForm.Username).toEqual(DataVariables.variableUserName);
+        registrationForm.setUsername(DataVariables.validUserName);
+        expect(registrationForm.Username).toEqual(DataVariables.validUserName);
     });
 
     test("Set valid username with spaces and letter at the end", () => {
-        registrationForm.setUsername(DataVariables.variableUserName2);
-        expect(registrationForm.Username).toEqual(DataVariables.variableUserName2);
+        registrationForm.setUsername("         m");
+        expect(registrationForm.Username).toEqual("         m");
     });
 
     test("Set valid username (with toContain)", () => {
-        registrationForm.setUsername(DataVariables.variableUserName);
-        expect(registrationForm.Username).toContain(DataVariables.variableUserName);
+        registrationForm.setUsername(DataVariables.validUserName);
+        expect(registrationForm.Username).toContain(DataVariables.validUserName);
     });
 
     test("Empty username", () => {
         expect(() => {
-            registrationForm.setUsername(DataVariables.variableUserName3);
-        }).toThrow(DataErrorMessage.errorText3);
+            registrationForm.setUsername("");
+        }).toThrow(DataErrorMessage.invalidUsernameError);
     });
 
     test("Set valid age", () => {
-        registrationForm.setAge(DataVariables.variableAge);
-        expect(registrationForm.Age).toEqual(DataVariables.variableAge);
+        registrationForm.setAge(25);
+        expect(registrationForm.Age).toEqual(25);
     });
 
     test("Invalid age", () => {
         expect(() => {
-            registrationForm.setAge(DataVariables.variableAge2);
-        }).toThrow(DataErrorMessage.errorText4);
+            registrationForm.setAge(-3);
+        }).toThrow(DataErrorMessage.invalidAgeError);
     });
 
     test("Invalid age with NaN", () => {
         expect(() => {
             registrationForm.setAge(NaN);
-        }).toThrow(DataErrorMessage.errorText4);
+        }).toThrow(DataErrorMessage.invalidAgeError);
     });
 
     test("Boundary values. Age with value 0", () => {
         expect(() => {
-            registrationForm.setAge(DataVariables.variableAge3);
-        }).toThrow(DataErrorMessage.errorText4);
+            registrationForm.setAge(0);
+        }).toThrow(DataErrorMessage.invalidAgeError);
     });
 
     test("Boundary values. Age with value 150", () => {
         expect(() => {
-            registrationForm.setAge(DataVariables.variableAge4);
-        }).toThrow(DataErrorMessage.errorText4);
+            registrationForm.setAge(150);
+        }).toThrow(DataErrorMessage.invalidAgeError);
     });
 
     test("Boundary values. Age with value 149", () => {
-        registrationForm.setAge(DataVariables.variableAge5);
-        expect(registrationForm.Age).toEqual(DataVariables.variableAge5);
+        registrationForm.setAge(149);
+        expect(registrationForm.Age).toEqual(149);
     });
 
     test("Boundary values. Age with value 1", () => {
-        registrationForm.setAge(DataVariables.variableAge6);
-        expect(registrationForm.Age).toEqual(DataVariables.variableAge6);
+        registrationForm.setAge(1);
+        expect(registrationForm.Age).toEqual(1);
     });
 
     test("Fractional number greater than 149 and less than 150", () => {
-        registrationForm.setAge(DataVariables.variableAge7);
-        expect(registrationForm.Age).toEqual(DataVariables.variableAge7);
+        registrationForm.setAge(149.9);
+        expect(registrationForm.Age).toEqual(149.9);
     });
 
     test("Register with all valid data, agree with terms", () => {
-        registrationForm.setEmail(DataVariables.variableMail);
-        registrationForm.setPassword(DataVariables.variablePassword);
-        registrationForm.setUsername(DataVariables.variableUserName);
-        registrationForm.setAge(DataVariables.variableAge);
+        registrationForm.setEmail(DataVariables.alexEmail);
+        registrationForm.setPassword(DataVariables.validPassword);
+        registrationForm.setUsername(DataVariables.validUserName);
+        registrationForm.setAge(25);
         registrationForm.agreeWithTerms();
         const result = registrationForm.register();
         expect(registrationForm.Registered).toEqual(true);
@@ -137,19 +137,19 @@ describe("RegistrationForm Tests", () => {
     });
 
     test("Do not agree with terms", () => { 
-        registrationForm.setEmail(DataVariables.variableMail);
-        registrationForm.setPassword(DataVariables.variablePassword);
-        registrationForm.setUsername(DataVariables.variableUserName);
-        registrationForm.setAge(DataVariables.variableAge);
+        registrationForm.setEmail(DataVariables.alexEmail);
+        registrationForm.setPassword(DataVariables.validPassword);
+        registrationForm.setUsername(DataVariables.validUserName);
+        registrationForm.setAge(25);
         const result = registrationForm.register();
         expect(registrationForm.Registered).toEqual(false);
         expect(result).toEqual("Ошибка при регистрации:\n- Необходимо согласиться с условиями");
     });
 
     test("Age field is missing", () => {
-        registrationForm.setEmail(DataVariables.variableMail);
-        registrationForm.setPassword(DataVariables.variablePassword);
-        registrationForm.setUsername(DataVariables.variableUserName);
+        registrationForm.setEmail(DataVariables.alexEmail);
+        registrationForm.setPassword(DataVariables.validPassword);
+        registrationForm.setUsername(DataVariables.validUserName);
         registrationForm.agreeWithTerms();
         const result = registrationForm.register();
         expect(registrationForm.Registered).toEqual(false);
@@ -157,9 +157,9 @@ describe("RegistrationForm Tests", () => {
     });
 
     test("Username field is missing", () => {
-        registrationForm.setEmail(DataVariables.variableMail);
-        registrationForm.setPassword(DataVariables.variablePassword);
-        registrationForm.setAge(DataVariables.variableAge);
+        registrationForm.setEmail(DataVariables.alexEmail);
+        registrationForm.setPassword(DataVariables.validPassword);
+        registrationForm.setAge(25);
         registrationForm.agreeWithTerms();
         const result = registrationForm.register();
         expect(registrationForm.Registered).toEqual(false);
@@ -167,9 +167,9 @@ describe("RegistrationForm Tests", () => {
     });
 
     test("Password field is missing", () => {
-        registrationForm.setEmail(DataVariables.variableMail);
-        registrationForm.setUsername(DataVariables.variableUserName);
-        registrationForm.setAge(DataVariables.variableAge);
+        registrationForm.setEmail(DataVariables.alexEmail);
+        registrationForm.setUsername(DataVariables.validUserName);
+        registrationForm.setAge(25);
         registrationForm.agreeWithTerms();
         const result = registrationForm.register();
         expect(registrationForm.Registered).toEqual(false);
@@ -177,9 +177,9 @@ describe("RegistrationForm Tests", () => {
     });
 
     test("Email field is missing", () => {
-        registrationForm.setPassword(DataVariables.variablePassword);
-        registrationForm.setUsername(DataVariables.variableUserName);
-        registrationForm.setAge(DataVariables.variableAge);
+        registrationForm.setPassword(DataVariables.validPassword);
+        registrationForm.setUsername(DataVariables.validUserName);
+        registrationForm.setAge(25);
         registrationForm.agreeWithTerms();
         const result = registrationForm.register();
         expect(registrationForm.Registered).toEqual(false);
@@ -187,8 +187,8 @@ describe("RegistrationForm Tests", () => {
     });
 
     test("Email and Password are missing", () => {
-        registrationForm.setUsername(DataVariables.variableUserName);
-        registrationForm.setAge(DataVariables.variableAge);
+        registrationForm.setUsername(DataVariables.validUserName);
+        registrationForm.setAge(25);
         registrationForm.agreeWithTerms();
         const result = registrationForm.register();
         expect(registrationForm.Registered).toEqual(false);
@@ -196,8 +196,8 @@ describe("RegistrationForm Tests", () => {
     });
 
     test("Username and Age are missing", () => {
-        registrationForm.setEmail(DataVariables.variableMail);
-        registrationForm.setPassword(DataVariables.variablePassword);
+        registrationForm.setEmail(DataVariables.alexEmail);
+        registrationForm.setPassword(DataVariables.validPassword);
         registrationForm.agreeWithTerms();
         const result = registrationForm.register();
         expect(registrationForm.Registered).toEqual(false);
